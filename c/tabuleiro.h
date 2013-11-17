@@ -87,7 +87,7 @@ void inicializa_casa(CASA *c, int *i) {
         c->occuped = true;
 
     c->x = 'a' + (*i) % 8;
-    c->y = '1' + ((*i) % 8) % 8;
+    c->y = '1' + (*i) / 8;
 }
 
 /**
