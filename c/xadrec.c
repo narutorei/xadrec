@@ -1,32 +1,31 @@
 /**
- * TESTE NCURSES
+ * Xadrec
  */
 #include <ncurses.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <uchar.h>
 
-#include "tabuleiro.h"
+#include "menu.h"
 
-int main()
-{
+int main() {
+    char c;
+
+    // Inicia a curses
     initscr();
 
-    printw("HELLO WORLD!");
-
-    char c;
-    int i = 0, ch, j;
-
+    // Desabilita o eco das letras
     noecho();
-    while((c = getch()) != '\n') {
-        clear();
 
-        i++;
-        j = 0;
-        for(ch = c; j < ch; j++)
-            printw(" ");
+    // Input direto da stream
+    cbreak();
 
-        printw("|\nº de espaços de acordo com o valor ASCII de: %c", c);
+    first_run();
 
-    }
+    menu();
 
+    // Destroi a curses
     endwin();
 
     return 0;
