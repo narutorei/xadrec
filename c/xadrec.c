@@ -21,6 +21,9 @@ int main() {
     // Input direto da stream
     cbreak();
 
+    // Esconde o cursor do terminal
+    curs_set(false);
+
     first_run();
 
     menu();
