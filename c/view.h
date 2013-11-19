@@ -50,17 +50,21 @@ void imprime_tabuleiro(WINDOW *w, TABULEIRO *tab) {
         for (*j = 1; *j <= TAB_WIDTH; ++(*j))
         {
 
+            // Calcula a coordenada real da matriz
             *serialized = ((TAB_WIDTH - (*i)) * TAB_WIDTH) + (*j) - 9;
 
+            // Calcula o x para imprimir as células
             *colX = (*startx) + (FIELD_SIZE * (*j));
             // Imprime sobre a divisória das linhas
             mvwaddch(w, *lineY + 1, *colX, '|');
 
-            mvwaddch(w, *lineY + 1, *colX - 4, tab->casas[*serialized].peca.tipo);
-
-
-            if(tab->casas[*serialized].occuped)
+            // Verifica se existe uma peça nesta casa
+            if(tab->casas[*serialized].occuped) {
+                // Impressão da peça
+                mvwaddch(w, *lineY + 1, *colX - 4, tab->casas[*serialized].peca.tipo);
+                // Imprime a cor da peça
                 mvwaddch(w, *lineY + 1, *colX - 3, tab->casas[*serialized].peca.cor == 1 ? 'P': 'B');
+            }
 
         }
     }
