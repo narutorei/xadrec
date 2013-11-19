@@ -25,11 +25,11 @@
 
 #include <wchar.h>
 
-#include "pecas.h"
-#include "jogadores.h"
-
 #define BRANCO 0
 #define PRETO 1
+
+#include "pecas.h"
+#include "jogadores.h"
 
 #define TAM_TAB 64
 
@@ -52,14 +52,14 @@ typedef struct
  */
 typedef struct {
     CASA casas[TAM_TAB];
-    JOGADORES jog[N_JOG];
+    JOGADOR jog[N_JOG];
     int vez;
 } TABULEIRO;
 
 /**
  * Constante indicativa de casa vazia
  */
-const CASA NULL_CASA = {NULL_PECA, false, BRANCO};
+static CASA NULL_CASA = {{' ', BRANCO}, false, BRANCO, ' ', ' '};
 
 /**
  * Função para resetar uma casa
@@ -69,8 +69,8 @@ void resetar_casa(CASA *c) {
     c->peca = NULL_CASA.peca;
     c->occuped = NULL_CASA.occuped;
     c->color = NULL_CASA.color;
-    c->x = '\0';
-    c->y = '\0';
+    c->x = NULL_CASA.x;
+    c->y = NULL_CASA.y;
 }
 
 /**
@@ -79,12 +79,13 @@ void resetar_casa(CASA *c) {
  * @param i 
  */
 void inicializa_casa(CASA *c, int *i) {
-    inicializa_peca(c->peca);
 
     c->color = ((*i) % 2);
 
-    if((*i < 16 && *i >= 0) || (*i > 48 && *i < 64))
+    if((*i < 16 && *i >= 0) || (*i > 48 && *i < 64)) {
+        inicializa_peca(&c->peca, i);
         c->occuped = true;
+    }
 
     c->x = 'a' + (*i) % 8;
     c->y = '1' + (*i) / 8;
@@ -98,10 +99,10 @@ void resetar_tabuleiro(TABULEIRO *tab) {
     int *i = malloc(sizeof(int));
 
     for(*i = 0; *i < TAM_TAB; (*i)++)
-        resetar_casa(tab->casas[*i]);
+        resetar_casa(&tab->casas[*i]);
 
     for(*i = 0; *i < N_JOG; (*i)++)
-        resetar_jogador(tab->jog[*i]);
+        resetar_jogador(&tab->jog[*i]);
 
     tab->vez = BRANCO;
 
@@ -124,7 +125,7 @@ TABULEIRO * cria_tabuleiro() {
         inicializa_casa(&(tab->casas[*i]), i);
 
     for(*i = 0; *i < N_JOG; (*i)++)
-        inicializa_jogador(tab->jog[*i]);
+        inicializa_jogador(&tab->jog[*i], i);
 
     return tab;
 
