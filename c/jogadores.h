@@ -35,10 +35,5 @@ void resetar_jogador(JOGADOR *j) {
  * @param i contagem de jogadores
  */
 void inicializa_jogador(JOGADOR *j, int *i) {
-
-    puts("Insira o nome:");
-    getstr(j->nome);
-
     j->cor = *i;
-
 }
