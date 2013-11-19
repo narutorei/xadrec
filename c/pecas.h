@@ -4,23 +4,17 @@
 
 // Defines para as peças
 
-#define PEAO_B '♙'
-#define PEAO_P '♟'
+#define PEAO 'P'
 
-#define BISPO_B '♗'
-#define BISPO_P '♝'
+#define BISPO 'B'
 
-#define CAVALO_B '♘'
-#define CAVALO_P '♞'
+#define CAVALO 'C'
 
-#define TORRE_B '♖'
-#define TORRE_P '♜'
+#define TORRE 'T'
 
-#define DAMA_B '♕'
-#define DAMA_P '♛'
+#define DAMA 'D'
 
-#define REI_B '♔'
-#define REI_P '♚'
+#define REI 'R'
 
 /**
  * tipo PECA
@@ -28,7 +22,7 @@
 typedef struct
 {
     // tipo da peça
-    wchar_t tipo;
+    char tipo;
 
     // Usa as constantes de "tabuleiro.h" para a definição do tipo da peça
     int cor;
@@ -71,21 +65,29 @@ void inicializa_peca(PECA *p, int *i) {
         // Peças brancas
         case 0:
         case 7:
-            p->tipo = TORRE_B;
+        case 56:
+        case 63:
+            p->tipo = TORRE;
             break;
         case 1:
         case 6:
-            p->tipo = CAVALO_B;
+        case 57:
+        case 62:
+            p->tipo = CAVALO;
             break;
         case 2:
         case 5:
-            p->tipo = BISPO_B;
+        case 58:
+        case 61:
+            p->tipo = BISPO;
             break;
         case 3:
-            p->tipo = DAMA_B;
+        case 59:
+            p->tipo = DAMA;
             break;
         case 4:
-            p->tipo = REI_B;
+        case 60:
+            p->tipo = REI;
             break;
         case 8:
         case 9:
@@ -95,10 +97,6 @@ void inicializa_peca(PECA *p, int *i) {
         case 13:
         case 14:
         case 15:
-            p->tipo = PEAO_B;
-            break;
-
-        // Peças pretas
         case 48:
         case 49:
         case 50:
@@ -107,26 +105,7 @@ void inicializa_peca(PECA *p, int *i) {
         case 53:
         case 54:
         case 55:
-            p->tipo = PEAO_P;
-            break;
-        case 56:
-        case 63:
-            p->tipo = TORRE_P;
-            break;
-        case 57:
-        case 62:
-            p->tipo = CAVALO_P;
-            break;
-        case 58:
-        case 61:
-            p->tipo = BISPO_P;
-            break;
-        case 59:
-            p->tipo = DAMA_P;
-            break;
-        case 60:
-            p->tipo = REI_P;
-            break;
+            p->tipo = PEAO;
     }
 
 }
