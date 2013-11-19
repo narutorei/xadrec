@@ -80,6 +80,12 @@ void cabecalho(WINDOW *j1, WINDOW *j2) {
     *lby4 = LINES/4;
     *leftpadding = 0;
 
+    wclear(j1);
+    box(j1, 0, 0);
+    
+    wclear(j2);
+    box(j2, 0, 0);
+
     getmaxyx(j1, *j1maxy, *j1maxx);
 
     // Título do programa no menu
@@ -119,12 +125,32 @@ char get_option() {
  * @param j1 janela do menu
  * @param j2 janela do jogo
  */
-void cabecalho_jogo(WINDOW *j1, WINDOW *j2) {
+void cabecalho_jogo(WINDOW *j1, WINDOW *j2, TABULEIRO *tab) {
+
+    int *y = malloc(sizeof(int));
+
+    *y = LINES / 5;
+
+    wclear(j1);
+
+    box(j1, 0, 0);
+
+    char titulo[6] = "XADREC";
+
+    mvwaddstr(j1, (*y) - 5, 10, titulo);
+
+
+    mvwaddstr(j1, *y, 4, "Vez do jogador:");
+    mvwaddstr(j1, (*y) + 1, 10, tab->vez == BRANCO ? "BRANCO" : "PRETO");
+
+    (*y) *= 2;
+
+    mvwaddstr(j1, *y, 4, "[1] Realizar movimento");
+    mvwaddstr(j1, (*y)+1, 4, "[0] Abandonar partida");
 
     // Atualiza as duas janelas
     wrefresh(j1);
     wrefresh(j2);
-
 
 }
 
