@@ -74,25 +74,34 @@ void cabecalho(WINDOW *j1, WINDOW *j2) {
      * lby4 é o número de linhas da janela principal divididos por 4
      * leftpadding igual à zero
      */
-    int lby4 = LINES/4, j1maxx, j1maxy, leftpadding = 0;
+    int *lby4 = malloc(sizeof(int)), *j1maxx = malloc(sizeof(int)),
+        *j1maxy = malloc(sizeof(int)), *leftpadding = malloc(sizeof(int));
+
+    *lby4 = LINES/4;
+    *leftpadding = 0;
+
+    getmaxyx(j1, *j1maxy, *j1maxx);
 
     // Título do programa no menu
     char titulo[6] = "XADREC";
 
-    // Pega as dimensões da janela do menu
-    getmaxyx(j1, j1maxy, j1maxx);
-
     // calcula o padding para os ítens do menu
-    leftpadding = j1maxx / 4;
+    *leftpadding = *j1maxx / 4;
 
+    mvwaddstr(j1, *lby4 - 5, *leftpadding, titulo);
 
-    mvwaddstr(j1, lby4 - 5, leftpadding, titulo);
-    mvwaddstr(j1, lby4, leftpadding, "[1] Novo jogo");
-    mvwaddstr(j1, lby4+1, leftpadding, "[0] Sair do programa");
-
+    // Imprime o menu
+    mvwaddstr(j1, *lby4, *leftpadding, "[1] Novo jogo");
+    mvwaddstr(j1, *lby4 + 1, *leftpadding, "[0] Sair do programa");
+    
     // Atualiza as duas janelas
     wrefresh(j1);
     wrefresh(j2);
+
+    free(lby4);
+    free(j1maxx);
+    free(j1maxy);
+    free(leftpadding);
 
 }
 
@@ -101,7 +110,22 @@ void cabecalho(WINDOW *j1, WINDOW *j2) {
  * @return caractere do menu inserido
  */
 char get_option() {
+
     return getch();
+}
+
+/**
+ * Cabeçalho para um jogo
+ * @param j1 janela do menu
+ * @param j2 janela do jogo
+ */
+void cabecalho_jogo(WINDOW *j1, WINDOW *j2) {
+
+    // Atualiza as duas janelas
+    wrefresh(j1);
+    wrefresh(j2);
+
+
 }
 
 /**
@@ -131,6 +155,9 @@ void menu() {
         refresh();
 
         switch(get_option()) {
+            case '1':
+                inicia_jogo(janela);
+                break;
             case '0':
                 continua = false;
                 break;
