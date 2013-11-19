@@ -58,7 +58,7 @@ void inicializa_peca(PECA *p, int *i) {
 
     if(*i < 32)
         p->cor = BRANCO;
-    else if(*i >= 32);
+    else if(*i >= 32)
         p->cor = PRETO;
 
     switch(*i) {
