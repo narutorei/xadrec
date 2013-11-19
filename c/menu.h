@@ -87,7 +87,7 @@ void cabecalho(WINDOW *j1, WINDOW *j2) {
 
 
     mvwaddstr(j1, lby4 - 5, leftpadding, titulo);
-    mvwaddstr(j1, lby4, leftpadding, "[0] Sair do programa");
+    mvwaddstr(j1, lby4, leftpadding, "[1] Novo jogo");
     mvwaddstr(j1, lby4+1, leftpadding, "[0] Sair do programa");
 
     // Atualiza as duas janelas
