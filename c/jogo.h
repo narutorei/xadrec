@@ -103,7 +103,8 @@ void inicia_jogo(WINDOW **janela) {
 
             // Opção de realizar o movimento
             case '1':
-                realizar_movimento();
+                realizar_movimento(janela[0], new_tab);
+                break;
 
             // Opção de sair do jogo
             case '0':
