@@ -62,21 +62,43 @@ WINDOW *create_newwin(int height, int width, int starty, int startx) {
    return local_win;
 }
 
+/**
+ * Gera o cabeçalho do programa
+ * @param j1 janela 1
+ * @param j2 janela 2
+ */
 void cabecalho(WINDOW *j1, WINDOW *j2) {
 
-    int lby4 = LINES/4;
+    /**
+     * Declara as variáveis e inicia:
+     * lby4 é o número de linhas da janela principal divididos por 4
+     * leftpadding igual à zero
+     */
+    int lby4 = LINES/4, j1maxx, j1maxy, leftpadding = 0;
 
-    mvwaddstr(j1, lby4, 10, "[0] Sair do programa");
-    mvwaddstr(j1, lby4+1, 10, "[0] Sair do programa");
+    // Título do programa no menu
+    char titulo[6] = "XADREC";
 
+    // Pega as dimensões da janela do menu
+    getmaxyx(j1, j1maxy, j1maxx);
+
+    // calcula o padding para os ítens do menu
+    leftpadding = j1maxx / 4;
+
+
+    mvwaddstr(j1, lby4 - 5, leftpadding, titulo);
+    mvwaddstr(j1, lby4, leftpadding, "[0] Sair do programa");
+    mvwaddstr(j1, lby4+1, leftpadding, "[0] Sair do programa");
+
+    // Atualiza as duas janelas
     wrefresh(j1);
     wrefresh(j2);
 
 }
 
 /**
- * 
- * @return [description]
+ * retorna a opção selecionada no menu
+ * @return caractere do menu inserido
  */
 char get_option() {
     return getch();
@@ -96,9 +118,10 @@ void menu() {
     refresh();
 
     // Cria a janela do menu
-    janela[0] = create_newwin(LINES, COLS/2, 0, 0);
+    janela[0] = create_newwin(LINES, COLS/4, 0, 0);
 
-    janela[1] = create_newwin(LINES, COLS/2, 0, (COLS/2)+1);
+    // Cria a janela do jogo
+    janela[1] = create_newwin(LINES,((COLS * 3)/4), 0, (COLS/4)+1);
 
 
     do {
