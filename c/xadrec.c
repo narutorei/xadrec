@@ -7,7 +7,11 @@
 #include <stdlib.h>
 #include <uchar.h>
 
+#include "tabuleiro.h"
+#include "movimentos.h"
+#include "jogo.h"
 #include "menu.h"
+
 
 int main() {
     char c;
