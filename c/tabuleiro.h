@@ -82,7 +82,7 @@ void inicializa_casa(CASA *c, int *i) {
 
     c->color = ((*i) % 2);
 
-    if((*i < 16 && *i >= 0) || (*i > 48 && *i < 64)) {
+    if((*i < 16 && *i >= 0) || (*i >= 48 && *i < 64)) {
         inicializa_peca(&c->peca, i);
         c->occuped = true;
     }

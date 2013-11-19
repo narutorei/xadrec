@@ -56,6 +56,7 @@ int compara_peca(PECA *p1, PECA *p2) {
  */
 void inicializa_peca(PECA *p, int *i) {
 
+    // Verifica se a peça é branca ou preta dada sua posição no tabuleiro
     if(*i < 32)
         p->cor = BRANCO;
     else if(*i >= 32)
